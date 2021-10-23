@@ -19,17 +19,17 @@ import img11 from '@/assets/images/11.png'
 import img12 from '@/assets/images/12.png'
 export default () => {
     return [
-        { size: 52 * 0.56, imgurl: img1, imgwidth: img1.asset.imageObject.width, score: 1 },
-        { size: 80 * 0.56, imgurl: img2, imgwidth: img2.asset.imageObject.width, score: 2 },
-        { size: 108 * 0.56, imgurl: img3, imgwidth: img3.asset.imageObject.width, score: 4 },
-        { size: 119 * 0.56, imgurl: img4, imgwidth: img4.asset.imageObject.width, score: 8 },
-        { size: 152 * 0.56, imgurl: img5, imgwidth: img5.asset.imageObject.width, score: 16 },
-        { size: 183 * 0.56, imgurl: img6, imgwidth: img6.asset.imageObject.width, score: 32 },
-        { size: 193 * 0.56, imgurl: img7, imgwidth: img7.asset.imageObject.width, score: 64 },
-        { size: 258 * 0.56, imgurl: img8, imgwidth: img8.asset.imageObject.width, score: 128 },
-        { size: 308 * 0.56, imgurl: img9, imgwidth: img9.asset.imageObject.width, score: 256 },
-        { size: 358 * 0.56, imgurl: img10, imgwidth: img10.asset.imageObject.width, score: 512 },
-        { size: 408 * 0.56, imgurl: img11, imgwidth: img11.asset.imageObject.width, score: 1024 },
-        { size: 408 * 0.56, imgurl: img12, imgwidth: img12.asset.imageObject.width, score: 2048 },
+        { size: 52 * 0.56, imgurl: img1, imgwidth: 160, score: 1 },
+        { size: 80 * 0.56, imgurl: img2, imgwidth: 160, score: 2 },
+        { size: 108 * 0.56, imgurl: img3, imgwidth: 160, score: 3 },
+        { size: 119 * 0.56, imgurl: img4, imgwidth: 160, score: 4 },
+        { size: 152 * 0.56, imgurl: img5, imgwidth: 160, score: 5 },
+        { size: 183 * 0.56, imgurl: img6, imgwidth: 160, score: 6 },
+        { size: 193 * 0.56, imgurl: img7, imgwidth: 160, score: 7 },
+        { size: 258 * 0.56, imgurl: img8, imgwidth: 160, score: 8 },
+        { size: 308 * 0.56, imgurl: img9, imgwidth: 160, score: 9 },
+        { size: 358 * 0.56, imgurl: img10, imgwidth: 160, score: 10 },
+        { size: 408 * 0.56, imgurl: img11, imgwidth: 1100, score: 11 },
+        { size: 408 * 0.56, imgurl: img12, imgwidth: 160, score: 12 },
     ]
 }

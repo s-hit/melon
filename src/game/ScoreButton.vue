@@ -4,15 +4,15 @@
         <a @click="$emit('end')" v-if="showEnd">
             结束
         </a>
-        <a @click="$emit('rank')" v-else>
+        <!-- <a @click="$emit('rank')" v-else>
             排行
-        </a>
+        </a> -->
     </div>
 </template>
 
 <script>
 export default {
-    emits: ['end', 'rank'],
+    emits: ['end'/*, 'rank'*/],
     props: {
         score: {
             type: Number,

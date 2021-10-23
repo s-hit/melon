@@ -9,14 +9,14 @@ const routes = [
             load: true,
         },
     },
-    {
-        path: '/rank',
-        name: 'Rank',
-        component: () => import(/* webpackChunkName: "rank" */ '../views/Rank.vue'),
-        meta: {
-            load: true,
-        },
-    },
+    // {
+    //     path: '/rank',
+    //     name: 'Rank',
+    //     component: () => import(/* webpackChunkName: "rank" */ '../views/Rank.vue'),
+    //     meta: {
+    //         load: true,
+    //     },
+    // },
 ]
 
 const router = createRouter({
@@ -26,7 +26,7 @@ const router = createRouter({
 router.beforeEach(async (to) => {
     if (to.meta && to.meta.load) {
         document.getElementById('vueload').className = ''
-        document.getElementById('tokibt').innerText = `加载中 精彩在路上`
+        document.getElementById('tokibt').innerText = `加载中 妈妈在路上`
     }
 })
 router.beforeResolve(async () => {

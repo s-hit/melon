@@ -13,7 +13,7 @@
             @update:currentMaxObject="currentMaxObject = $event"
             @die="endGame"
         />
-        <score-button class="score-btn" :score="score" :showEnd="!faild" @end="endGame" @rank="toRank" />
+        <score-button class="score-btn" :score="score" :showEnd="!faild" @end="endGame" />
         <gravity-controller class="gravity-btn" @gravity="gravity = $event" />
         <div class="faild" :class="{ show: showFaild }">
             <div class="content">
@@ -21,7 +21,6 @@
                 <div class="desc">失败了...</div>
                 <div class="operation" v-show="showOperation">
                     <button @click="reload">再来一次</button>
-                    <button @click="toRank">查看排行</button>
                 </div>
             </div>
         </div>
@@ -33,7 +32,6 @@
                 <h1>{{ score }}</h1>
                 <div class="operation" v-show="showOperation">
                     <button @click="reload">再来一次</button>
-                    <button @click="toRank">查看排行</button>
                 </div>
             </div>
         </div>
@@ -49,6 +47,13 @@ import { Notify, Dialog } from 'vant'
 import Stage from '@/game/Stage'
 import ScoreButton from '@/game/ScoreButton'
 import GravityController from '@/game/GravityController'
+
+import AV from 'leancloud-storage';
+
+function getUrlParam(name) {
+    return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [, ""])[1].replace(/\+/g, '%20')) || null; 
+} 
+
 export default {
     components: {
         Stage,
@@ -88,21 +93,6 @@ export default {
         },
     },
     methods: {
-        async toRank() {
-            if (!this.gameEnd && this.score > 10) {
-                try {
-                    await Dialog.confirm({
-                        title: '是否要离开游戏？',
-                        message: '您的分数和进度将会丢失',
-                    })
-                } catch (e) {
-                    return
-                }
-            }
-            this.$router.push({
-                name: 'Rank',
-            })
-        },
         async endGame() {
             this.gameEnd = true
             if (this.faild) {
@@ -112,6 +102,31 @@ export default {
             }
             await this.$refs.stage.addScore(this.faild)
             this.showOperation = true
+            if (!getUrlParam('id')) var id = '章鱼哥';
+            else var id = getUrlParam('id');
+            var score = this.$data.score;
+            var faild = this.$data.faild;
+
+            function updateRanking(user, faild, score) {
+                AV.Leaderboard.updateStatistics(user, faild ? {
+                    'melon_fail' : score,
+                    'melon_sum' : score,
+                } : {
+                    'melon_succ' : score,
+                    'melon_sum' : score,
+                });
+            }
+            
+            AV.User.logIn(id, id).then((user) => {
+                updateRanking(user, faild, score);
+            }, () => {
+                const user = new AV.User();
+                user.setUsername(id);
+                user.setPassword(id);
+                user.signUp().then((user) => {
+                    updateRanking(user, faild, score);
+                });
+            });
         },
         async reload() {
             this.stageKey++
@@ -124,18 +139,18 @@ export default {
         },
         getRandom() {
             const p = random(100, 200)
-            if (p < 130 || this.currentMaxObject == 0) {
-                return 0
-            }
-            if (p < 160 || this.currentMaxObject == 1) {
-                return 1
-            }
-            if (p < 175 || this.currentMaxObject == 2) {
-                return 2
-            }
-            if (p < 190 || this.currentMaxObject == 3) {
-                return 3
-            }
+            // if (p < 130 || this.currentMaxObject == 0) {
+            //     return 0
+            // }
+            // if (p < 160 || this.currentMaxObject == 1) {
+            //     return 1
+            // }
+            // if (p < 175 || this.currentMaxObject == 2) {
+            //     return 2
+            // }
+            // if (p < 190 || this.currentMaxObject == 3) {
+            //     return 3
+            // }
             return 4
         },
     },

@@ -4,9 +4,6 @@ export default {}
 
 <template>
     <router-view />
-    <div class="copyright">
-        &copy;2021 BYR Team - xyToki
-    </div>
 </template>
 <style lang="scss">
 html {
