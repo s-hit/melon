@@ -139,18 +139,18 @@ export default {
         },
         getRandom() {
             const p = random(100, 200)
-            // if (p < 130 || this.currentMaxObject == 0) {
-            //     return 0
-            // }
-            // if (p < 160 || this.currentMaxObject == 1) {
-            //     return 1
-            // }
-            // if (p < 175 || this.currentMaxObject == 2) {
-            //     return 2
-            // }
-            // if (p < 190 || this.currentMaxObject == 3) {
-            //     return 3
-            // }
+            if (p < 130 || this.currentMaxObject == 0) {
+                return 0
+            }
+            if (p < 160 || this.currentMaxObject == 1) {
+                return 1
+            }
+            if (p < 175 || this.currentMaxObject == 2) {
+                return 2
+            }
+            if (p < 190 || this.currentMaxObject == 3) {
+                return 3
+            }
             return 4
         },
     },
