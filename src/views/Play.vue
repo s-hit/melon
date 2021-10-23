@@ -18,7 +18,7 @@
         <div class="faild" :class="{ show: showFaild }">
             <div class="content">
                 <h1>{{ score }}</h1>
-                <div class="desc">失败了...</div>
+                <div class="desc">😭</div>
                 <div class="operation" v-show="showOperation">
                     <button @click="reload">再来一次</button>
                 </div>
@@ -86,9 +86,9 @@ export default {
     watch: {
         currentMaxObject(value) {
             if (value === this.successKey) {
-                Notify({ type: 'success', message: '恭喜通关！继续合成有惊喜哦！' })
+                Notify({ type: 'success', message: '🥰恭喜！\n还可以继续游玩哦' })
             } else if (value > this.successKey) {
-                Notify({ type: 'success', message: '恭喜解锁惊喜！你可以继续刷分，也可以在左上角结束游戏' })
+                Notify({ type: 'success', message: '🥵小幸，我的小幸' })
             }
         },
     },
@@ -96,8 +96,10 @@ export default {
         async endGame() {
             this.gameEnd = true
             if (this.faild) {
+                var faild = true;
                 this.showFaild = true
             } else {
+                var faild = false;
                 this.showSuccess = true
             }
             await this.$refs.stage.addScore(this.faild)
@@ -105,7 +107,6 @@ export default {
             if (!getUrlParam('id')) var id = '章鱼哥';
             else var id = getUrlParam('id');
             var score = this.$data.score;
-            var faild = this.$data.faild;
 
             function updateRanking(user, faild, score) {
                 AV.Leaderboard.updateStatistics(user, faild ? {
